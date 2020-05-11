@@ -1,2 +1,15 @@
-<h1><%= @user.name %>さん</h1>
-<p>メールアドレス: <%= @user.email %></p>
+<h2><%= @user.name %>さん</h2>
+<p><strong>メールアドレス</strong>: <%= @user.email %></p>
+<p id = "notice"><%= notice %></p>
+<p>
+  <strong>プロフィール画像:</strong>
+  <br>
+  <%= image_tag @user.image.url if @user.image? %>
+</p>
+<br>
+<h4>※下記リンク先に行く場合は必ず上記の<strong>”Login”</strong>をしてからクリックしてください！</h4>
+<%= link_to 'プロフィールを編集する', edit_user_path %>
+<br>
+<%= link_to 'ログインができたら投稿一覧画面へGO！', pictures_path %>
+<br>
+<%= link_to("#{@user.name}さんのお気に入り一覧を表示する", "/users/#{@user.id}/favorites") %>

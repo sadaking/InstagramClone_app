@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+before_action :set_user, only: [:show, :edit, :update, :favorites]
+
   def new
     @user = User.new
   end
@@ -13,13 +15,38 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if current_user == @user
+      if @user.update(user_params)
+        flash[:success] = 'ユーザー情報を編集しました。'
+        render :edit
+      else
+        flash.now[:danger] = 'ユーザー情報の編集に失敗しました。'
+        render :edit
+      end
+      else
+        redirect_to "users/new"
+    end
+  end
+
+  def favorites
+    @favorites = Favorite.where(user_id: @user.id)
   end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation)
+                                 :password_confirmation,
+                                 :image)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
