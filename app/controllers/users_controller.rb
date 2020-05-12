@@ -38,13 +38,6 @@ before_action :set_user, only: [:show, :edit, :update, :favorites]
     @favorites = Favorite.where(user_id: @user.id)
   end
 
-  def ensure_correct_user
-    @user = User.find_by(id:params[:id])
-    if @user.user_id != current_user.id
-      flash[:notice] = "あなたには権限がありません！"
-      redirect_to users_path
-    end
-  end
 
   private
 
