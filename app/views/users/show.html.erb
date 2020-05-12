@@ -8,7 +8,6 @@
     <%= image_tag @user.image.url if @user.image? %>
   </p>
   <br>
-  <h4>※下記リンク先に行く場合は必ず上記の<strong>”Login”</strong>をしてからクリックしてください！</h4>
   <%= link_to 'プロフィールを編集する', edit_user_path %>
   <br>
   <%= link_to 'ログインができたら投稿一覧画面へGO！', pictures_path %>
